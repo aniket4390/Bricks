@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '../../{{component_name.snakeCase()}}.dart';
-import 'package:jiogate_2/app/constant/controller_tags.dart';
-import 'package:jiogate_2/app/core/network/network_info.dart';
+import 'package:project_name/app/constant/controller_tags.dart';
+import 'package:project_name/app/core/network/network_info.dart';
 import '../../data/datasources/{{component_name.snakeCase()}}_remote_datasource.dart';
 import '../../data/repositories/{{component_name.snakeCase()}}_repository_impl.dart';
 import '../../domain/repositories/{{component_name.snakeCase()}}_repository.dart';
