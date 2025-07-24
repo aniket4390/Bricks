@@ -1,9 +1,9 @@
 import '../../data/datasources/{{component_name.snakeCase()}}_remote_datasource.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/repositories/{{component_name.snakeCase()}}_repository.dart';
-import 'package:jiogate_2/app/core/errors/exceptions.dart';
-import 'package:jiogate_2/app/core/errors/failures.dart';
-import 'package:jiogate_2/app/core/network/network_info.dart';
+import 'package:project_name/app/core/errors/exceptions.dart';
+import 'package:project_name/app/core/errors/failures.dart';
+import 'package:project_name/app/core/network/network_info.dart';
 //import
 
 class {{component_name.pascalCase()}}RepositoryImpl extends {{component_name.pascalCase()}}Repository {
