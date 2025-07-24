@@ -1,0 +1,10 @@
+name: component
+description: Generate Clean Architecture component with GetX
+version: 0.1.0+1
+
+vars:
+  component_name:
+    type: string
+    description: Component name (snake_case)
+    prompt: What is the component name?
+    default: example_component

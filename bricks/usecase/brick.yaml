@@ -1,0 +1,14 @@
+name: usecase
+description: Add a new use case to existing component
+version: 0.1.0+1
+
+vars:
+  component_name:
+    type: string
+    description: Component name (snake_case)
+    prompt: What is the component name?
+  
+  usecase_name:
+    type: string
+    description: UseCase name (snake_case)
+    prompt: What is the use case name?
