@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import '../../domain/repositories/{{component_name.snakeCase()}}_repository.dart';
-import 'package:jiogate_2/app/core/domain/usecases/usecase.dart';
-import 'package:jiogate_2/app/core/errors/failures.dart';
+import 'package:project_name/app/core/domain/usecases/usecase.dart';
+import 'package:project_name/app/core/errors/failures.dart';
 
 class {{usecase_name.pascalCase()}} implements UseCase {
   final {{component_name.pascalCase()}}Repository repository;
