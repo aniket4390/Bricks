@@ -156,7 +156,7 @@ Future<void> _updateUseCaseExports(String componentName, String usecaseName) asy
 }
 
 Future<void> _updateBinding(String componentNameSnakeCase,String componentName,String componentNamePascalCase, String usecaseNameCamelCase) async {
-  final file = File('$componentName/presentation/binding/${componentNameSnakeCase}_bindings.dart');
+  final file = File('$componentName/presentation/binding/${componentNameSnakeCase}_binding.dart');
   if (!await file.exists()) return;
   
   final content = await file.readAsString();
