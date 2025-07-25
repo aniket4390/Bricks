@@ -133,7 +133,7 @@ Future<void> _updateRemoteDataSource(String componentName, String usecaseNameCam
 }
 
 Future<void> _updateBinding(String componentName, String usecaseName, String componentNamePascalCase, String usecaseNamePascalCase, String usecaseNameCamelCase) async {
-  final file = File('$componentName/presentation/binding/${componentName}_binding.dart');
+  final file = File('$componentName/domain/usecases/usecases.dart');
   if (!await file.exists()) return;
   
   final content = await file.readAsString();
@@ -142,7 +142,7 @@ Future<void> _updateBinding(String componentName, String usecaseName, String com
   // Add import
   for (int i = 0; i < lines.length; i++) {
     if (lines[i].trim() == '//import') {
-      lines.insert(i, "import '../../domain/usecases/${usecaseName}_usecase.dart';");
+      lines.insert(i, "export '${usecaseName}_usecase.dart';");
       break;
     }
   }
@@ -151,17 +151,9 @@ Future<void> _updateBinding(String componentName, String usecaseName, String com
   for (int i = 0; i < lines.length; i++) {
     if (lines[i].trim() == '//dependencies') {
       final dependency = '''
-    Get.lazyPut(
-      () {
-        ${componentNamePascalCase}RemoteDataSource remoteDataSource = ${componentNamePascalCase}RemoteDataSourceImpl();
-        ${componentNamePascalCase}Repository repository = ${componentNamePascalCase}RepositoryImpl(
-          networkInfo: networkInfo,
-          remoteDataSource: remoteDataSource,
-        );
-        $usecaseNamePascalCase $usecaseNameCamelCase = $usecaseNamePascalCase(repository);
-        return $usecaseNameCamelCase;
-      },
-      tag: ${componentNamePascalCase}Tags.${usecaseNameCamelCase}UseCaseTag,
+    _registerUseCase<${componentNamePascalCase}>(
+      () => ${componentNamePascalCase}(repository),
+      ${componentNamePascalCase}Tags.${usecaseNameCamelCase}UseCaseTag,
     );
 ''';
       lines.insert(i, dependency);

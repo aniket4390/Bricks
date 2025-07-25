@@ -12,10 +12,30 @@ class {{component_name.pascalCase()}}Binding extends Bindings {
 
   @override
   void dependencies() {
-    Get.lazyPut(
+
+    final networkInfo = Get.find<NetworkInfo>(tag: CoreTags.networkTag);
+
+    Get.create<{{component_name.pascalCase()}}Controller>(
       () => {{component_name.pascalCase()}}Controller(),
-      tag: {{component_name.pascalCase()}}Tags.{{component_name.camelCase()}}ControllerTag,
+      tag: {{component_name.pascalCase()}}Tags.{{component_name.snakeCase()}}ControllerTag,
     );
+
+    // Shared singletons
+    final remoteDataSource = {{component_name.pascalCase()}}RemoteDataSourceImpl();
+    final repository = {{component_name.pascalCase()}}RepositoryImpl(
+      networkInfo: networkInfo,
+      remoteDataSource: remoteDataSource,
+    );
+
+
     //dependencies
   }
+
+  void _registerUseCase<T>(T Function() create, String tag) {
+    Get.lazyPut<T>(
+      create,
+      fenix: false,
+      tag: tag,
+    );
+  } 
 }
