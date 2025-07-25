@@ -28,7 +28,7 @@ Future<void> run(HookContext context) async {
     await _updateUseCaseExports(componentName, usecaseName);
 
     // Update binding
-    await _updateBinding(componentNameSnakeCase, componentName, componentNamePascalCase, usecaseNameCamelCase);
+    await _updateBinding(componentNameSnakeCase, componentName, componentNamePascalCase, usecaseNameCamelCase,usecaseNamePascalCase);
     
     // Update tags
     await _updateTags(componentName, usecaseNameCamelCase);
@@ -155,7 +155,7 @@ Future<void> _updateUseCaseExports(String componentName, String usecaseName) asy
 
 }
 
-Future<void> _updateBinding(String componentNameSnakeCase,String componentName,String componentNamePascalCase, String usecaseNameCamelCase) async {
+Future<void> _updateBinding(String componentNameSnakeCase,String componentName,String componentNamePascalCase, String usecaseNameCamelCase,String usecaseNamePascalCase) async {
   final file = File('$componentName/presentation/binding/${componentNameSnakeCase}_binding.dart');
   if (!await file.exists()) return;
   
@@ -166,8 +166,8 @@ Future<void> _updateBinding(String componentNameSnakeCase,String componentName,S
   for (int i = 0; i < lines.length; i++) {
     if (lines[i].trim() == '//dependencies') {
       final dependency = '''
-    _registerUseCase<${componentNamePascalCase}>(
-      () => ${componentNamePascalCase}(repository),
+    _registerUseCase<${usecaseNamePascalCase}>(
+      () => ${usecaseNamePascalCase}(repository),
       ${componentNamePascalCase}Tags.${usecaseNameCamelCase}UseCaseTag,
     );
 ''';
