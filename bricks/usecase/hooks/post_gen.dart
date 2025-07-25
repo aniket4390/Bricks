@@ -7,6 +7,7 @@ Future<void> run(HookContext context) async {
   
   // Convert to different case formats
   final componentNameCamelCase = componentName.camelCase;
+  final componentNameSnakeCase = componentName.snakeCase;
   final componentNamePascalCase = componentName.pascalCase;
   final usecaseNameCamelCase = usecaseName.camelCase;
   final usecaseNamePascalCase = usecaseName.pascalCase;
@@ -23,8 +24,11 @@ Future<void> run(HookContext context) async {
     // Update remote data source
     await _updateRemoteDataSource(componentName, usecaseNameCamelCase, usecaseNamePascalCase);
     
+     // Update usecase exports
+    await _updateUseCaseExports(componentName, usecaseName)
+
     // Update binding
-    await _updateBinding(componentName, usecaseName, componentNamePascalCase, usecaseNamePascalCase, usecaseNameCamelCase);
+    await _updateBinding(componentNameSnakeCase, componentName, componentNamePascalCase, usecaseNameCamelCase)
     
     // Update tags
     await _updateTags(componentName, usecaseNameCamelCase);
@@ -132,10 +136,10 @@ Future<void> _updateRemoteDataSource(String componentName, String usecaseNameCam
   await file.writeAsString(lines.join('\n'));
 }
 
-Future<void> _updateBinding(String componentName, String usecaseName, String componentNamePascalCase, String usecaseNamePascalCase, String usecaseNameCamelCase) async {
+Future<void> _updateUseCaseExports(String componentName, String usecaseName) async {
   final file = File('$componentName/domain/usecases/usecases.dart');
   if (!await file.exists()) return;
-  
+
   final content = await file.readAsString();
   final lines = content.split('\n');
   
@@ -146,6 +150,17 @@ Future<void> _updateBinding(String componentName, String usecaseName, String com
       break;
     }
   }
+
+  await file.writeAsString(lines.join('\n'));
+
+}
+
+Future<void> _updateBinding(String componentNameSnakeCase,String componentName,String componentNamePascalCase, String usecaseNameCamelCase) async {
+  final file = File('$componentName/presentation/binding/${componentNameSnakeCase}_bindings.dart');
+  if (!await file.exists()) return;
+  
+  final content = await file.readAsString();
+  final lines = content.split('\n');
   
   // Add dependency
   for (int i = 0; i < lines.length; i++) {
@@ -163,6 +178,7 @@ Future<void> _updateBinding(String componentName, String usecaseName, String com
   
   await file.writeAsString(lines.join('\n'));
 }
+
 
 Future<void> _updateTags(String componentName, String usecaseNameCamelCase) async {
   final file = File('$componentName/$componentName.dart');

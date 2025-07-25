@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import '../../{{component_name.snakeCase()}}.dart';
+import '../../domain/usecases/usecases.dart';
 import 'package:project_name/app/constant/controller_tags.dart';
 import 'package:project_name/app/core/network/network_info.dart';
 import '../../data/datasources/{{component_name.snakeCase()}}_remote_datasource.dart';
