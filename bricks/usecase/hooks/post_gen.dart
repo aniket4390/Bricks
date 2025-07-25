@@ -25,10 +25,10 @@ Future<void> run(HookContext context) async {
     await _updateRemoteDataSource(componentName, usecaseNameCamelCase, usecaseNamePascalCase);
     
      // Update usecase exports
-    await _updateUseCaseExports(componentName, usecaseName)
+    await _updateUseCaseExports(componentName, usecaseName);
 
     // Update binding
-    await _updateBinding(componentNameSnakeCase, componentName, componentNamePascalCase, usecaseNameCamelCase)
+    await _updateBinding(componentNameSnakeCase, componentName, componentNamePascalCase, usecaseNameCamelCase);
     
     // Update tags
     await _updateTags(componentName, usecaseNameCamelCase);
